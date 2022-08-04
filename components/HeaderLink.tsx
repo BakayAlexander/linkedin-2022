@@ -5,7 +5,7 @@ import React from 'react';
 type HeaderLinkProps = {
   icon: OverridableComponent<SvgIconTypeMap<{}, 'svg'>> & { muiName: string };
   text: string;
-  avatar: string;
+  avatar?: string;
   feed?: boolean;
 };
 
