@@ -18,14 +18,14 @@
   }
 
   .headerLink_feed {
-    @apply text-black/60 hover:text-black lg:-mb-1.5 space-y-1;
+    @apply text-black/60 hover:text-black lg:-mb-1.5 space-y-1 dark:text-white/75 hover:text-white;
   }
 
   .headerLink_unfeed {
-    @apply text-gray-500 hover:text-gray-700;
+    @apply text-gray-500 hover:text-gray-700 dark:bg-white;
   }
 
   .headerLink_active {
-    @apply hidden lg:inline-flex h-0.5 w-[calc(100%+20px)] bg-black rounded-t-full;
+    @apply hidden lg:inline-flex h-0.5 w-[calc(100%+20px)] bg-black rounded-t-full dark:bg-white;
   }
 }

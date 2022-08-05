@@ -28,11 +28,7 @@ const Header: React.FC = () => {
   }, []);
 
   return (
-    <header
-      className={`${
-        theme === 'dark' ? '!bg-[#1D2226]' : 'bg-white'
-      } sticky top-0 z-40 flex items-center justify-around py-1.5 px-3 focus-within:shadow-lg`}
-    >
+    <header className="sticky top-0 z-40 flex items-center justify-around py-1.5 px-3 focus-within:shadow-lg bg-white dark:!bg-[#1D2226]">
       <div className="flex items-center space-x-2 w-full max-w-xs">
         {mounted && (
           <>
@@ -44,16 +40,12 @@ const Header: React.FC = () => {
           </>
         )}
 
-        <div
-          className={`${theme === 'dark' && 'md:bg-gray-700'} flex items-center space-x-1 py-2.5 px-4 rounded w-full`}
-        >
+        <div className="flex items-center space-x-1 py-2.5 px-4 rounded w-full dark:md:bg-gray-700">
           <SearchRoundedIcon />
           <input
             type="text"
             placeholder="Search"
-            className={`${
-              theme === 'dark' && '!placeholder-white/75'
-            } hidden md:inline-flex bg-transparent text-sm focus:outline-none placeholder-black/70 flex-grow`}
+            className="hidden md:inline-flex bg-transparent text-sm focus:outline-none placeholder-black/70 flex-grow dark:!placeholder-white/75"
           />
         </div>
       </div>

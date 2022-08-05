@@ -6,7 +6,8 @@ import { ThemeProvider } from 'next-themes';
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <SessionProvider session={session}>
-      <ThemeProvider>
+      {/* Necesary to use attribute while using next-themes, to get access to the dark class */}
+      <ThemeProvider attribute="class">
         <Component {...pageProps} />
       </ThemeProvider>
     </SessionProvider>
