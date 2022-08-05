@@ -1,25 +1,35 @@
-import { SvgIconTypeMap } from '@mui/material';
-import { OverridableComponent } from '@mui/material/OverridableComponent';
 import React from 'react';
+import { useSession, signOut } from 'next-auth/react';
+import { useTheme } from 'next-themes';
 
 type HeaderLinkProps = {
-  icon: OverridableComponent<SvgIconTypeMap<{}, 'svg'>> & { muiName: string };
+  icon: any;
   text: string;
-  avatar?: string;
+  avatar?: boolean;
   feed?: boolean;
+  active?: boolean;
+  hidden?: boolean;
 };
 
-const HeaderLink: React.FC<HeaderLinkProps> = ({ icon: Icon, text, avatar, feed }) => {
+const HeaderLink: React.FC<HeaderLinkProps> = ({ icon: Icon, text, feed, active, avatar, hidden }) => {
+  const { data: session } = useSession();
+  const { theme } = useTheme();
   return (
     <div
-      className={`${
+      className={`headeLink ${hidden && 'hidden md:inline-flex'}
+      ${
         feed
-          ? 'text-black/70 space-y-1 hover:text-black dark:text-white/75 dark:hover:text-white lg:-mb-1.5'
-          : 'text-gray-500 hover:text-gray-700'
-      } flex flex-col justify-center items-center cursor-pointer`}
+          ? `headerLink_feed ${theme === 'dark' && 'text-white/75 hover:text-white'}`
+          : `headerLink_unfeed ${theme === 'dark' && 'bg-white'}`
+      }
+      ${active && `!text-black ${theme === 'dark' && '!text-white'}`}`}
+      onClick={() => avatar && signOut()}
     >
-      {avatar ? <Icon className="!h-7 !w-7" /> : <Icon className="!h-7 !w-7" />}
-      <h4 className="text-sm">{text}</h4>
+      {avatar ? <Icon className="!h-7 !w-7 lg:!-mb-1" src={session?.user?.image} /> : <Icon />}
+
+      <h4 className={`text-sm ${feed && 'hidden lg:flex justify-center w-full mx-auto'}`}>{text}</h4>
+
+      {active && <span className={`${theme === 'dark' && 'bg-white'} headerLink_active`} />}
     </div>
   );
 };
