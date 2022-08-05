@@ -22,8 +22,6 @@ export const getServerSideProps = async () => {
 };
 
 const Home = ({ providers }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const router = useRouter();
-
   return (
     <div className="space-y-10 relative">
       <Head>
