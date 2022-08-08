@@ -1,10 +1,13 @@
 import { useSession } from 'next-auth/react';
 import React, { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { modalState } from '../recoil/modalAtom';
 
 const Form: React.FC = () => {
   const [inputValue, setInputValue] = useState('');
   const [photoUrl, setPhotoUrl] = useState('');
   const { data: session } = useSession();
+  const [modalOpen, setModalOpen] = useRecoilState(modalState);
 
   const handleUploadPost = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -13,13 +16,20 @@ const Form: React.FC = () => {
       method: 'POST',
       body: JSON.stringify({
         text: inputValue,
-        photoUrl,
+        photoUrl: photoUrl,
         userName: session?.user?.name,
         email: session?.user?.email,
-        userImage: session?.user?.image,
+        userImg: session?.user?.image,
         createdAt: new Date().toString(),
       }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
+
+    const resData = await res.json();
+
+    setModalOpen(false);
   };
 
   return (
