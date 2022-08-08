@@ -27,17 +27,17 @@ const Sidebar: React.FC = () => {
         <Avatar
           onClick={signOut}
           // @ts-ignore
-          src={session!.user!.image}
+          src={session?.user?.image}
           className="!h-14 !w-14 !border-2 !absolute !top-4 !cursor-pointer"
         />
         <div className="mt-5 py-4 space-x-0.5">
           <h4 className="hover:underline decoration-[#a3ffd5] underline-offset-1 cursor-pointer">
-            {session!.user!.name}
+            {session?.user?.name}
           </h4>
-          <p className="text-black/60 dark:text-white/70 text-sm">{session!.user!.email}</p>
+          <p className="text-black/60 dark:text-white/70 text-sm">{session?.user?.email}</p>
         </div>
         <div className="hidden md:inline text-left dark:text-white/70 text-sm">
-          <div className="font-medium space-y-0.5 dark:border-t border-gray-600 py-3 px-4 ">
+          <div className="sidebar__buttonContainer">
             <div className="sidebar__button" onClick={useHoatToast}>
               <h4>Who viewed your profile</h4>
               <span className="text-blue-500">303</span>
@@ -47,7 +47,7 @@ const Sidebar: React.FC = () => {
               <span className="text-blue-500">1,002</span>
             </div>
           </div>
-          <div className="font-medium space-y-0.5 dark:border-t border-gray-600 py-3 px-4 ">
+          <div className="sidebar__buttonContainer">
             <h4 className="leading-4 text-xs">Access exclusive tools & insights</h4>
             <div className="sidebar__button" onClick={useHoatToast}>
               <h4 className="dark:text-white font-medium">
@@ -56,7 +56,7 @@ const Sidebar: React.FC = () => {
               </h4>
             </div>
           </div>
-          <div className="font-medium space-y-0.5 dark:border-t border-gray-600 py-3 px-4 flex items-center space-x-1.5">
+          <div className="sidebar__buttonContainer flex items-center space-x-1.5">
             <div className="sidebar__button" onClick={useHoatToast}>
               <BookmarkOutlinedIcon className="!-ml-1" />
               <h4 className="dark:text-white font-medium">My items</h4>
@@ -77,7 +77,7 @@ const Sidebar: React.FC = () => {
         <p className="sidebar__link" onClick={useHoatToast}>
           Followed Hashtags
         </p>
-        <div className="font-medium space-y-0.5 dark:border-t border-gray-600 py-3 px-4 space-x-1.5 text-center cursor-pointer opacity-80 hover:opacity-100">
+        <div className="sidebar__buttonContainer space-x-1.5 text-center cursor-pointer opacity-80 hover:opacity-100">
           <h4 className="dark:text-white font-medium text-sm" onClick={useHoatToast}>
             Discover More
           </h4>
