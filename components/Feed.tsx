@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
 import Input from './Input';
 
 type FeedProps = {};
 
 const Feed: React.FC<FeedProps> = () => {
   const [realtimePosts, setRealtimePosts] = useState([]);
+  const [handlePost, setHandlePost] = useRecoilState(handlePostState);
+  const [useSSRPosts, setUseSSRPosts] = useRecoilState(useSSRPostState);
 
   useEffect(() => {
     const fetchPosts = async () => {
