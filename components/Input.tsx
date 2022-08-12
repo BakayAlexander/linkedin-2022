@@ -8,14 +8,14 @@ import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import ArticleIcon from '@mui/icons-material/Article';
 import { useRecoilState } from 'recoil';
 import { modalState, modalTypeState } from '../recoil/modalAtom';
-import { Toaster } from 'react-hot-toast';
-import hoatToast from '../utils/hoatToast';
+import { toastState } from '../recoil/toastAtom';
 
 const Input: React.FC = () => {
   const { data: session } = useSession();
   //Using recoil to manage states. It's more simple than Redux.
   const [modalOpen, setModalOpen] = useRecoilState(modalState);
   const [modalType, setModalType] = useRecoilState(modalTypeState);
+  const [toastShown, setToastShown] = useRecoilState(toastState);
 
   return (
     <div className="bg-white dark:bg-[#1d2226] rounded-lg p-3 space-y-3 border-gray-300 dark:border-none">
@@ -48,20 +48,19 @@ const Input: React.FC = () => {
           <PhotoSizeSelectActualIcon className="text-blue-400" />
           <h4 className="opacity-80 group-hover:opacity-100">Photo</h4>
         </button>
-        <button className="input__button group" onClick={hoatToast}>
+        <button className="input__button group" onClick={() => setToastShown(true)}>
           <VideoCameraBackIcon className="text-green-400" />
           <h4 className="opacity-80 group-hover:opacity-100">Video</h4>
         </button>
-        <button className="input__button group" onClick={hoatToast}>
+        <button className="input__button group" onClick={() => setToastShown(true)}>
           <BusinessCenterIcon className="text-blue-300" />
           <h4 className="opacity-80 group-hover:opacity-100">Job</h4>
         </button>
-        <button className="input__button group" onClick={hoatToast}>
+        <button className="input__button group" onClick={() => setToastShown(true)}>
           <ArticleIcon className="text-red-400" />
           <h4 className="opacity-80 group-hover:opacity-100 whitespace-nowrap">Write Article</h4>
         </button>
       </div>
-      <Toaster position="bottom-center" />
     </div>
   );
 };

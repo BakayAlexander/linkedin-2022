@@ -13,10 +13,8 @@ import ThumbUpOffAltOutlinedIcon from '@mui/icons-material/ThumbUpOffAltOutlined
 import ThumbUpOffAltRoundedIcon from '@mui/icons-material/ThumbUpOffAltRounded';
 import { getPostState, handlePostState } from '../recoil/postAtom';
 import { useSession } from 'next-auth/react';
-import hoatToast from '../utils/hoatToast';
-import { Toaster } from 'react-hot-toast';
 import TimeAgo from 'timeago-react';
-import Image from 'next/image';
+import { toastState } from '../recoil/toastAtom';
 
 type PostProps = { post: Post; modalPost: any };
 
@@ -28,6 +26,7 @@ const Post: React.FC<PostProps> = ({ post, modalPost }) => {
   const [showAllText, setShowAllText] = useState(false);
   const { data: session } = useSession();
   const [handlePost, setHandlePost] = useRecoilState(handlePostState);
+  const [toastShown, setToastShown] = useRecoilState(toastState);
 
   const truncate = (string: string, n: number) =>
     string?.length > n ? string.substr(0, n - 1) + ' ...see more' : string;
@@ -49,7 +48,7 @@ const Post: React.FC<PostProps> = ({ post, modalPost }) => {
     setHandlePost(true);
     setModalOpen(false);
     setLiked(!liked);
-    hoatToast();
+    setToastShown(true);
   };
 
   return (
@@ -70,8 +69,8 @@ const Post: React.FC<PostProps> = ({ post, modalPost }) => {
             <CloseRoundedIcon className="dark:text-white/75 h-7 w-7" />
           </IconButton>
         ) : (
-          <IconButton>
-            <MoreHorizRoundedIcon className="dark:text-white/75 h-7 w-7" onClick={hoatToast} />
+          <IconButton onClick={() => setToastShown(true)}>
+            <MoreHorizRoundedIcon className="dark:text-white/75 h-7 w-7" />
           </IconButton>
         )}
       </div>
@@ -119,13 +118,12 @@ const Post: React.FC<PostProps> = ({ post, modalPost }) => {
             <h4>Delete post</h4>
           </button>
         ) : (
-          <button className="post__button" onClick={hoatToast}>
+          <button className="post__button" onClick={() => setToastShown(true)}>
             <ReplyRoundedIcon className="-scale-x-100" />
             <h4>Share</h4>
           </button>
         )}
       </div>
-      <Toaster position="bottom-center" />
     </div>
   );
 };

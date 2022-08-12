@@ -11,6 +11,8 @@ import { modalState, modalTypeState } from '../recoil/modalAtom';
 import { connectToDatabase } from '../utils/connectToDb';
 import { Post, News } from '../typings';
 import Widgets from '../components/Widgets';
+import toast, { Toaster } from 'react-hot-toast';
+import { toastState } from '../recoil/toastAtom';
 
 export const getServerSideProps: GetServerSideProps = async context => {
   //Check if the user authenticated on the server
@@ -59,6 +61,29 @@ export type PostsProps = {
 const Home = ({ posts, news }: PostsProps) => {
   const [modalOpen, setModalOpen] = useRecoilState(modalState);
   const [modalType, setModalType] = useRecoilState(modalTypeState);
+  const [toastShown, setToastShown] = useRecoilState(toastState);
+
+  const hoatToast = (state: boolean) => {
+    const toast_red = {
+      background: '#a3ffd5',
+      color: 'black',
+      fontWeight: 'semi-bold',
+      fontSize: '16px',
+      padding: '15px',
+      borderRadius: '9999px',
+      maxWidth: '1000px',
+    };
+    if (state) {
+      toast(`Alexander Bakay currently working on this function`, {
+        duration: 2000,
+        style: toast_red,
+      });
+      setToastShown(false);
+    }
+
+    return;
+  };
+  hoatToast(toastShown);
 
   return (
     <div className="bg-[#f3f2ef] h-screen overflow-y-scroll dark:bg-black/90 dark:text-white md:space-y-6">
@@ -82,6 +107,7 @@ const Home = ({ posts, news }: PostsProps) => {
           {modalOpen && <Modal handleClose={() => setModalOpen(false)} type={modalType} />}
         </AnimatePresence>
       </main>
+      <Toaster position="bottom-center" />
     </div>
   );
 };
