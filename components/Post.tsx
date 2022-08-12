@@ -16,7 +16,7 @@ import { useSession } from 'next-auth/react';
 import TimeAgo from 'timeago-react';
 import { toastState } from '../recoil/toastAtom';
 
-type PostProps = { post: Post; modalPost: any };
+type PostProps = { post: Post; modalPost?: any };
 
 const Post: React.FC<PostProps> = ({ post, modalPost }) => {
   const [modalOpen, setModalOpen] = useRecoilState(modalState);
