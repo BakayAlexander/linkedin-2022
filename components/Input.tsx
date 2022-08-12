@@ -8,6 +8,8 @@ import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import ArticleIcon from '@mui/icons-material/Article';
 import { useRecoilState } from 'recoil';
 import { modalState, modalTypeState } from '../recoil/modalAtom';
+import { Toaster } from 'react-hot-toast';
+import hoatToast from '../utils/hoatToast';
 
 const Input: React.FC = () => {
   const { data: session } = useSession();
@@ -36,23 +38,30 @@ const Input: React.FC = () => {
         </motion.button>
       </div>
       <div className="flex items-center flex-wrap gap-4 justify-center md:gap-x-10">
-        <button className="input__button group">
+        <button
+          className="input__button group"
+          onClick={() => {
+            setModalOpen(true);
+            setModalType('dropIn');
+          }}
+        >
           <PhotoSizeSelectActualIcon className="text-blue-400" />
           <h4 className="opacity-80 group-hover:opacity-100">Photo</h4>
         </button>
-        <button className="input__button group">
+        <button className="input__button group" onClick={hoatToast}>
           <VideoCameraBackIcon className="text-green-400" />
           <h4 className="opacity-80 group-hover:opacity-100">Video</h4>
         </button>
-        <button className="input__button group">
+        <button className="input__button group" onClick={hoatToast}>
           <BusinessCenterIcon className="text-blue-300" />
           <h4 className="opacity-80 group-hover:opacity-100">Job</h4>
         </button>
-        <button className="input__button group">
+        <button className="input__button group" onClick={hoatToast}>
           <ArticleIcon className="text-red-400" />
           <h4 className="opacity-80 group-hover:opacity-100 whitespace-nowrap">Write Article</h4>
         </button>
       </div>
+      <Toaster position="bottom-center" />
     </div>
   );
 };

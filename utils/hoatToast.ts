@@ -1,6 +1,6 @@
 import toast from 'react-hot-toast';
 
-const useHoatToast = () => {
+const hoatToast = () => {
   const toast_red = {
     background: '#a3ffd5',
     color: 'black',
@@ -19,4 +19,4 @@ const useHoatToast = () => {
   return;
 };
 
-export default useHoatToast;
+export default hoatToast;

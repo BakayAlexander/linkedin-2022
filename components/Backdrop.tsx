@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 type BackdropProps = {
   children: any;
-  onClick: any;
+  onClick: () => void;
 };
 
 const Backdrop: React.FC<BackdropProps> = ({ children, onClick }) => {
