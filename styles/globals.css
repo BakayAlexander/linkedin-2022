@@ -18,7 +18,7 @@
   }
 
   .headerLink_feed {
-    @apply text-black/60 hover:text-black lg:-mb-1.5 space-y-1 dark:text-white/75 hover:text-white;
+    @apply text-black/60 hover:text-black lg:-mb-1.5 space-y-1 dark:text-white/75 dark:hover:text-white;
   }
 
   .headerLink_unfeed {
@@ -29,11 +29,23 @@
     @apply hidden lg:inline-flex h-0.5 w-[calc(100%+20px)] bg-black rounded-t-full dark:bg-white;
   }
 
+  .sidebar__buttonContainer {
+    @apply font-medium space-y-0.5 dark:border-t border-gray-600 py-3 px-4;
+  }
+
   .sidebar__button {
     @apply flex justify-between space-x-2 cursor-pointer opacity-80 hover:opacity-100;
   }
 
   .sidebar__link {
     @apply text-[13px] font-medium text-blue-500 hover:underline cursor-pointer px-2.5;
+  }
+
+  .input__button {
+    @apply flex items-center space-x-2 font-medium cursor-pointer text-sm;
+  }
+
+  .post__button {
+    @apply flex items-center justify-center space-x-2 cursor-pointer hover:bg-black/10 dark:hover:bg-black/20 w-full py-2.5 rounded transition ease-out font-medium;
   }
 }
