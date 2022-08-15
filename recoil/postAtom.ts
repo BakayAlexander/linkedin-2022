@@ -6,7 +6,7 @@ export const handlePostState = atom({
   default: false,
 });
 
-export const getPostState = atom({
+export const getPostState = atom<Post | object>({
   key: 'getPostState',
   default: {},
 });

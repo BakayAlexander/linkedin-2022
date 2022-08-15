@@ -15,6 +15,7 @@ import { getPostState, handlePostState } from '../recoil/postAtom';
 import { useSession } from 'next-auth/react';
 import TimeAgo from 'timeago-react';
 import { toastState } from '../recoil/toastAtom';
+import ReactPlayer from 'react-player';
 
 type PostProps = { post: Post; modalPost?: any };
 
@@ -95,6 +96,7 @@ const Post: React.FC<PostProps> = ({ post, modalPost }) => {
           }}
         />
       )}
+      {post.videoUrl && !modalPost && <ReactPlayer url={post.videoUrl} width="100%" controls />}
       <div className="flex justify-evenly items-center dark:border-t border-gray-600 mx-2.5 pt-2 text-black/60 dark:text-white/80">
         {modalPost ? (
           <button className="post__button">
