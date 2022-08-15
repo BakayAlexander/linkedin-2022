@@ -17,7 +17,7 @@ const Feed: React.FC<FeedProps> = ({ posts }) => {
   const [handlePost, setHandlePost] = useRecoilState(handlePostState);
   const [useSSRPosts, setUseSSRPosts] = useRecoilState(useSSRPostsState);
   const [allPosts, setAllPosts] = useRecoilState(getAllPostsState);
-  const searchedPosts = useRecoilValue(searchedPostsState);
+  const [searchedPosts, setSearchedPosts] = useRecoilState(searchedPostsState);
 
   useEffect(() => {
     if (searchedPosts.length !== 0) {
@@ -39,9 +39,23 @@ const Feed: React.FC<FeedProps> = ({ posts }) => {
     }
   }, [handlePost]);
 
+  console.log(handlePost);
+
   return (
     <div className="space-y-6 pb-24 max-w-lg">
       <Input />
+      {searchedPosts.length !== 0 && searchedPosts.length !== allPosts.length && (
+        <div className="flex items-center justify-center">
+          <button
+            onClick={() => {
+              setSearchedPosts([]);
+              setHandlePost(true);
+            }}
+          >
+            <p>Show all posts</p>
+          </button>
+        </div>
+      )}
       {!useSSRPosts
         ? realtimePosts.map(realtimePost => <Post key={realtimePost._id} post={realtimePost} />)
         : posts.map(post => <Post key={post._id} post={post} />)}
