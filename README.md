@@ -47,3 +47,7 @@ The page will reload when you make changes.
 # :desktop_computer: Public domain
 
 ## [LinkedIn](https://bakay-linkedin.vercel.app/)
+
+https://user-images.githubusercontent.com/88661163/184631343-529b0f4b-9c66-41f1-849d-5ed16a678ad3.mp4
+
+
