@@ -1,34 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# :clapper: LinkedIn Clone 2022
 
-## Getting Started
+This project was building with
+[Create Next App](https://nextjs.org/docs/api-reference/create-next-app).
 
-First, run the development server:
+## :rocket: `Technical stack`:
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+- :barber: Next.js
+- :fire: Tailwind
+- :watch: TypeScript
+- :rocket: MongoDB
+- :euro: [Recoil](https://github.com/facebookexperimental/Recoil) to simplify state management
+  functions.
+- :euro: [FramerMotion](https://github.com/fireship-io/framer-demo)
+- :receipt: Next Auth (to auth with Google)
+- :receipt: Google News Api
+- :sunglasses: Next theme
+- :movie_camera: React-Player
+- :sandwich: React Hot Toast
+- :sandwich: Time ago react library
+- :shoe: CodeStyle - Prettier
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### :scroll: Description:
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+This is a LindkedIn clone web app. Fully adaptive. Choose your google account and start posting. Add
+photos, videos and search for interesting posts.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### :astronaut: User guide:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+1. Login with your Google account (it’s safe, app don’t see or store your password - I use Next Auth
+   module).
+2. Choose light or dark mode.
+3. Add new posts, you can also attach photo by using url link.
+4. To add video to your post be sure your YouTube link looks like this:
+   https://www.youtube.com/watch?v=im2DetQWs24&t=226s&ab_channel=ChrisLuno.
+5. Delete your post or make new one.
+6. Search throw added posts (to show all posts again just clear input add push to search).
+7. Logout by pushing your profile icon.
 
-## Learn More
+### :shinto_shrine: `yarn dev`
 
-To learn more about Next.js, take a look at the following resources:
+- Download this project or `git clone`
+- Run command `yarn install`
+- Run `yarn dev`
+- Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The page will reload when you make changes.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+# :desktop_computer: Public domain
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## [LinkedIn](https://bakay-linkedin.vercel.app/)
