@@ -7,7 +7,7 @@ import VideoCameraBackIcon from '@mui/icons-material/VideoCameraBack';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import ArticleIcon from '@mui/icons-material/Article';
 import { useRecoilState } from 'recoil';
-import { modalState, modalTypeState } from '../recoil/modalAtom';
+import { modalMediaContentState, modalState, modalTypeState } from '../recoil/modalAtom';
 import { toastState } from '../recoil/toastAtom';
 
 const Input: React.FC = () => {
@@ -15,6 +15,7 @@ const Input: React.FC = () => {
   //Using recoil to manage states. It's more simple than Redux.
   const [modalOpen, setModalOpen] = useRecoilState(modalState);
   const [modalType, setModalType] = useRecoilState(modalTypeState);
+  const [mediaContentType, setMediaContentType] = useRecoilState(modalMediaContentState);
   const [toastShown, setToastShown] = useRecoilState(toastState);
 
   return (
@@ -32,6 +33,7 @@ const Input: React.FC = () => {
           onClick={() => {
             setModalOpen(true);
             setModalType('dropIn');
+            setMediaContentType('photo');
           }}
         >
           New post
@@ -43,12 +45,20 @@ const Input: React.FC = () => {
           onClick={() => {
             setModalOpen(true);
             setModalType('dropIn');
+            setMediaContentType('photo');
           }}
         >
           <PhotoSizeSelectActualIcon className="text-blue-400" />
           <h4 className="opacity-80 group-hover:opacity-100">Photo</h4>
         </button>
-        <button className="input__button group" onClick={() => setToastShown(true)}>
+        <button
+          className="input__button group"
+          onClick={() => {
+            setModalOpen(true);
+            setModalType('dropIn');
+            setMediaContentType('video');
+          }}
+        >
           <VideoCameraBackIcon className="text-green-400" />
           <h4 className="opacity-80 group-hover:opacity-100">Video</h4>
         </button>

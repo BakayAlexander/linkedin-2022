@@ -10,3 +10,5 @@ export const modalTypeState = atom({
   key: 'modalTypeState',
   default: 'dropIn',
 });
+
+export const modalMediaContentState = atom({ key: 'modalMediaContentState', default: 'photo' });

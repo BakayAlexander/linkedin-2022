@@ -1,15 +1,18 @@
 import { useSession } from 'next-auth/react';
 import React, { useState } from 'react';
-import { useRecoilState } from 'recoil';
-import { modalState } from '../recoil/modalAtom';
-import { handlePostState } from '../recoil/postAtom';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { modalMediaContentState, modalState } from '../recoil/modalAtom';
+import { handlePostState, searchedPostsState } from '../recoil/postAtom';
 
 const Form: React.FC = () => {
   const [inputValue, setInputValue] = useState('');
   const [photoUrl, setPhotoUrl] = useState('');
+  const [videoUrl, setVideoUrl] = useState('');
   const { data: session } = useSession();
   const [modalOpen, setModalOpen] = useRecoilState(modalState);
   const [handlePost, setHandlePost] = useRecoilState(handlePostState);
+  const [searchedPosts, setSearchedPosts] = useRecoilState(searchedPostsState);
+  const mediaContentType = useRecoilValue(modalMediaContentState);
 
   const handleUploadPost = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -19,6 +22,7 @@ const Form: React.FC = () => {
       body: JSON.stringify({
         text: inputValue,
         photoUrl: photoUrl,
+        videoUrl: videoUrl,
         userName: session?.user?.name,
         email: session?.user?.email,
         userImg: session?.user?.image,
@@ -32,6 +36,7 @@ const Form: React.FC = () => {
     const resData = await res.json();
     setHandlePost(true);
     setModalOpen(false);
+    setSearchedPosts([]);
   };
 
   return (
@@ -43,13 +48,24 @@ const Form: React.FC = () => {
         value={inputValue}
         onChange={e => setInputValue(e.target.value)}
       />
-      <input
-        type="text"
-        placeholder="Add a photo URL (optional)."
-        className="bg-transparent focus:outline-none truncate max-w-xs md:max-w-sm dark:placeholder-white/70"
-        value={photoUrl}
-        onChange={e => setPhotoUrl(e.target.value)}
-      />
+      {mediaContentType === 'photo' && (
+        <input
+          type="text"
+          placeholder="Add a photo URL (optional)."
+          className="bg-transparent focus:outline-none truncate max-w-xs md:max-w-sm dark:placeholder-white/70"
+          value={photoUrl}
+          onChange={e => setPhotoUrl(e.target.value)}
+        />
+      )}
+      {mediaContentType === 'video' && (
+        <input
+          type="text"
+          placeholder="Add a YouTube link: https://www.youtube.com/watch?v= "
+          className="bg-transparent focus:outline-none truncate max-w-xs md:max-w-sm dark:placeholder-white/70"
+          value={videoUrl}
+          onChange={e => setVideoUrl(e.target.value)}
+        />
+      )}
       <button
         type="submit"
         onClick={handleUploadPost}

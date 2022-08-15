@@ -6,7 +6,7 @@ export const handlePostState = atom({
   default: false,
 });
 
-export const getPostState = atom({
+export const getPostState = atom<Post | object>({
   key: 'getPostState',
   default: {},
 });
@@ -14,4 +14,14 @@ export const getPostState = atom({
 export const useSSRPostsState = atom({
   key: 'useSSRPostsState',
   default: true,
+});
+
+export const getAllPostsState = atom<Post[]>({
+  key: 'getAllPostsState',
+  default: [],
+});
+
+export const searchedPostsState = atom<Post[]>({
+  key: 'searchedPostsState',
+  default: [],
 });

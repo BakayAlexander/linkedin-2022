@@ -62,15 +62,15 @@ type ModalProps = {
 
 const Modal: React.FC<ModalProps> = ({ handleClose, type }) => {
   const { data: session } = useSession();
-  // @ts-ignore
-  const post: PostType = useRecoilValue(getPostState);
+  //@ts-ignore
+  const post = useRecoilValue<PostType>(getPostState);
 
   return (
     <Backdrop onClick={handleClose}>
       {type === 'dropIn' && (
         <motion.div
           onClick={e => e.stopPropagation()}
-          className="rounded-xl flex flex-col justify-center bg-white dark:bg-[#1D2226] w-full max-w-lg md:-mt-96 mx-6"
+          className="rounded-xl flex flex-col justify-center bg-white dark:bg-[#1D2226] w-full max-w-lg md:-mt-110 mx-6"
           variants={dropIn}
           initial="hidden"
           animate="visible"

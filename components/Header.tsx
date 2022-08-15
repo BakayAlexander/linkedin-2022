@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React, { FormEvent, FormEventHandler, useEffect, useState } from 'react';
 import HeaderLink from './HeaderLink';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import GroupIcon from '@mui/icons-material/Group';
@@ -11,6 +11,14 @@ import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
 import { Avatar } from '@mui/material';
 import { useTheme } from 'next-themes';
 import { motion } from 'framer-motion';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import {
+  getAllPostsState,
+  getPostState,
+  handlePostState,
+  searchedPostsState,
+} from '../recoil/postAtom';
+import { Post } from '../typings';
 
 const spring = {
   type: 'spring',
@@ -21,6 +29,23 @@ const spring = {
 const Header: React.FC = () => {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
+  const [searchInput, setSearchInput] = useState('');
+  const allPosts: Post[] = useRecoilValue(getAllPostsState);
+  const [searchedPosts, setSearchedPosts] = useRecoilState(searchedPostsState);
+  const [handlePost, setHandlePost] = useRecoilState(handlePostState);
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
+    if (searchInput === '') {
+      setSearchedPosts(allPosts);
+    }
+    event.preventDefault();
+    const filtredPosts = allPosts.filter(
+      post => post.text.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1
+    );
+    setSearchedPosts(filtredPosts);
+    setHandlePost(true);
+    setSearchInput('');
+  };
 
   //After mounting we get access to the theme. I use this sheme, because of SSR.
   useEffect(() => {
@@ -41,12 +66,18 @@ const Header: React.FC = () => {
         )}
 
         <div className="flex items-center space-x-1 py-2.5 px-4 rounded w-full dark:md:bg-gray-700">
-          <SearchRoundedIcon />
-          <input
-            type="text"
-            placeholder="Search"
-            className="hidden md:inline-flex bg-transparent text-sm focus:outline-none placeholder-black/70 flex-grow dark:!placeholder-white/75"
-          />
+          <form onSubmit={handleSubmit}>
+            <button type="submit">
+              <SearchRoundedIcon />
+            </button>
+            <input
+              type="text"
+              placeholder="Search"
+              value={searchInput}
+              onChange={e => setSearchInput(e.target.value)}
+              className="hidden md:inline-flex bg-transparent text-sm focus:outline-none placeholder-black/70 flex-grow dark:!placeholder-white/75"
+            />
+          </form>
         </div>
       </div>
 

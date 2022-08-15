@@ -1,11 +1,12 @@
 export type Post = {
   _id: string;
   text: string;
-  photoUrl: string;
+  photoUrl?: string;
   userName: string;
   email: string;
   userImg: string;
   createdAt: string;
+  videoUrl?: string;
 };
 
 export type News = {
