@@ -22,7 +22,7 @@
   }
 
   .headerLink_unfeed {
-    @apply text-gray-500 hover:text-gray-700 dark:bg-white;
+    @apply text-gray-500 hover:text-gray-700;
   }
 
   .headerLink_active {

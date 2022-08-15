@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
-import { handlePostState, useSSRPostsState } from '../recoil/postAtom';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import {
+  getAllPostsState,
+  handlePostState,
+  searchedPostsState,
+  useSSRPostsState,
+} from '../recoil/postAtom';
 import Input from './Input';
 import Post from './Post';
 import { Post as PostType } from '../typings';
@@ -11,19 +16,27 @@ const Feed: React.FC<FeedProps> = ({ posts }) => {
   const [realtimePosts, setRealtimePosts] = useState<PostType[]>([]);
   const [handlePost, setHandlePost] = useRecoilState(handlePostState);
   const [useSSRPosts, setUseSSRPosts] = useRecoilState(useSSRPostsState);
+  const [allPosts, setAllPosts] = useRecoilState(getAllPostsState);
+  const searchedPosts = useRecoilValue(searchedPostsState);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      const res = await fetch('/api/posts', {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-      });
-      const resData = await res.json();
-      setRealtimePosts(resData);
+    if (searchedPosts.length !== 0) {
+      setRealtimePosts(searchedPosts);
       setHandlePost(false);
-      setUseSSRPosts(false);
-    };
-    fetchPosts();
+    } else {
+      const fetchPosts = async () => {
+        const res = await fetch('/api/posts', {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+        });
+        const resData = await res.json();
+        setRealtimePosts(resData);
+        setAllPosts(resData);
+        setHandlePost(false);
+        setUseSSRPosts(false);
+      };
+      fetchPosts();
+    }
   }, [handlePost]);
 
   return (

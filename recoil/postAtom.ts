@@ -15,3 +15,13 @@ export const useSSRPostsState = atom({
   key: 'useSSRPostsState',
   default: true,
 });
+
+export const getAllPostsState = atom<Post[]>({
+  key: 'getAllPostsState',
+  default: [],
+});
+
+export const searchedPostsState = atom<Post[]>({
+  key: 'searchedPostsState',
+  default: [],
+});

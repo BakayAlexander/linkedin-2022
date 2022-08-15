@@ -2,7 +2,7 @@ import { useSession } from 'next-auth/react';
 import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { modalState } from '../recoil/modalAtom';
-import { handlePostState } from '../recoil/postAtom';
+import { handlePostState, searchedPostsState } from '../recoil/postAtom';
 
 const Form: React.FC = () => {
   const [inputValue, setInputValue] = useState('');
@@ -10,6 +10,7 @@ const Form: React.FC = () => {
   const { data: session } = useSession();
   const [modalOpen, setModalOpen] = useRecoilState(modalState);
   const [handlePost, setHandlePost] = useRecoilState(handlePostState);
+  const [searchedPosts, setSearchedPosts] = useRecoilState(searchedPostsState);
 
   const handleUploadPost = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -32,6 +33,7 @@ const Form: React.FC = () => {
     const resData = await res.json();
     setHandlePost(true);
     setModalOpen(false);
+    setSearchedPosts([]);
   };
 
   return (
